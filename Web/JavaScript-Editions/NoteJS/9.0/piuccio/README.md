@@ -1,56 +1,166 @@
+# cowsay
 
-***
+````
+ __________________
+< srsly dude, why? >
+ ------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+````
 
-# Cowsay (JavaScript with NodeJS 9.0)
+cowsay is a configurable talking cow, originally written in Perl by [Tony Monroe](https://github.com/tnalpgge/rank-amateur-cowsay)
 
-The source project is being credited, so it can be used here. It is a rewrite of Cowsay into JavaScript using NodeJS 9.0
+This project is a translation in JavaScript of the original program and an attempt to bring the same silliness to node.js.
 
-[`Go support the original project (https://github.com/piuccio/cowsay)`](https://github.com/piuccio/cowsay/)
+## Install
 
-***
-### File info
+    npm install -g cowsay
 
-<details open><summary><p lang="en"><b><u>Click/tap here to expand/collapse this section</u></b></p></summary>
+## Usage
 
-**File type:** `Markdown (*.md *.mkd *.mdown *.markdown)`
+    cowsay JavaScript FTW!
 
-**File version:** `1 (2022, Wednesday, July 6th at 1:38 pm PST)`
+or
 
-**Line count (including blank lines and compiler line):** `57`
+    cowthink node.js is cool
 
-**Current article language:** `English (EN_USA)` / `Markdown (CommonMark)` / `HTML5 (HyperText Markup Language 5.3)`
+It acts in the same way as the original cowsay, so consult `cowsay(1)` or run `cowsay -h`
 
-**Encoding:** `UTF-8 (Emoji 12.0 or higher recommended)`
+````
+ ________
+< indeed >
+ --------
+    \
+     \
+                                   .::!!!!!!!:.
+  .!!!!!:.                        .:!!!!!!!!!!!!
+  ~~~~!!!!!!.                 .:!!!!!!!!!UWWW$$$
+      :$$NWX!!:           .:!!!!!!XUWW$$$$$$$$$P
+      $$$$$##WX!:      .<!!!!UW$$$$"  $$$$$$$$#
+      $$$$$  $$$UX   :!!UW$$$$$$$$$   4$$$$$*
+      ^$$$B  $$$$\     $$$$$$$$$$$$   d$$R"
+        "*$bd$$$$      '*$$$$$$$$$$$o+#"
+             """"          """""""
+````
 
-**All times are UTC-7 (PDT/Pacific Time)** `(Please also account for DST (Daylight Savings Time) for older/newer entries up until it is abolished/no longer followed)`
+## Usage as a module
 
-_Note that on 2022, Sunday, March 13th at 2:00 am PST, the time jumped ahead 1 hour to 3:00 am._
+cowsay can be used as any other npm dependency
+```js
+var cowsay = require("cowsay");
 
-**You may need special rendering support for the `<details>` HTML tag being used in this document**
+console.log(cowsay.say({
+    text : "I'm a moooodule",
+    e : "oO",
+    T : "U "
+}));
 
-</details>
+// or cowsay.think()
+```
+````
+ _________________
+( I'm a moooodule )
+ -----------------
+        o   ^__^
+         o  (oO)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+````
 
-***
+getting a list of cow names:
+```js
+function get_cows(error, cow_names) {
+    if (error) {
+        console.log(error)
+    }
+    else if (cow_names) {
+        console.log(`Number of cows available: ${cow_names.length}`);
+    }
+}
 
-## File history
+cowsay.list(get_cows);
+```
 
-<details><summary><p lang="en"><b>Click/tap here to expand/collapse the file history section for this project</b></p></summary>
+#### Typescript examples:
+```ts
+import * as cowsay from "cowsay"
 
-<details><summary><p lang="en"><b>Version 1 (2022, Wednesday, July 6th at 1:38 pm PST)</b></p></summary>
+let output: string = cowsay.say({ text: 'Hello from typescript!' });
 
-**This version was made by:** [`@seanpm2001`](https://github.com/seanpm2001/)
+console.log(output);
+```
 
-> Changes:
+getting a list of cow names:
+```ts
+function get_cows(error: NodeJS.ErrnoException, cow_names: Array<string>): void {
+    if (error) {
+        console.log(`Error getting cow names: ${error.message}`)
+    }
+    else if (cow_names) {
+        console.log(`Number of cows available: ${cow_names.length}`);
+    }
+}
 
-- [x] Started the file
-- [x] Added the `credits` section
-- [x] Added the `didn't play` section
-- [x] Added the `file info` section
-- [x] Added the `file history` section
-- [ ] No other changes in version 1
+cowsay.list(get_cows);
+```
 
-</details>
+importing the `IOptions` interface directly:
+```ts
+import { IOptions } from "cowsay" // optional
 
-</details>
+let opts: IOptions = {
+    text: "Hello from TypeScript!",
+    e: '^^',
+    r: true,
+};
 
-***
+console.log(cowsay.say(opts));
+```
+
+
+## Pipe from standard input
+
+    echo please repeat | cowsay
+
+## Usage in the browser
+
+cowsay works in your browser too with rollup / webpack / browserify / you name it.
+
+```js
+import { say } from 'cowsay';
+
+console.log(say({ text: 'grazing in the browser' }));
+```
+
+You can customize the cow by importing the relevant one
+
+```js
+import { think, SQUIRREL } from 'cowsay';
+
+console.log(think({
+  text: 'grazing in the browser',
+  cow: SQUIRREL,
+  eyes: 'pp',
+  tongue: ';;',
+}));
+```
+
+All cows are included in the bundle, but you can use rollup / webpack tree-shake feature to reduce the final bundle size.
+
+### Browser options
+
+```js
+say({
+  text: 'hello',
+  cow: '', // Template for a cow, get inspiration from `./cows`
+  eyes: 'oo', // Select the appearance of the cow's eyes, equivalent to cowsay -e
+  tongue: 'L|', // The tongue is configurable similarly to the eyes through -T and tongue_string, equivalent to cowsay -T
+  wrap: false, // If it is specified, the given message will not be word-wrapped. equivalent to cowsay -n
+  wrapLength: 40, // Specifies roughly where the message should be wrapped. equivalent to cowsay -W
+  mode: 'b', // One of 	"b", "d", "g", "p", "s", "t", "w", "y"
+});
+```
