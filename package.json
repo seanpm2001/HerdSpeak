@@ -1,0 +1,93 @@
+{
+  "name": "HerdSpeak",
+  "version": "0.0.1",
+  "description": "HerdSpeak is a fork of Cowsay, a configurable talking cow. HerdSpeak adds many new features.",
+  "keywords": [
+    "cow",
+    "cowsay",
+    "cowthink",
+    "figlet",
+    "talking",
+    "ASCII",
+    "herdspeak",
+    "herd",
+    "hurdspeak",
+    "hurd",
+    "fork",
+    "gui",
+    "cli",
+    "linux",
+    "windows",
+    "macos",
+    "perl",
+    "python",
+    "javascript",
+    "joke program"
+  ],
+  "homepage": "https://github.com/seanpm2001/HerdSpeak",
+  "author": {
+    "name": "Sean Patrick Myrick",
+    "email": "seanpm2001-mailing-list@protonmail.com",
+    "url": "https://github.com/seanpm2001/"
+  },
+  "license": "GPL3",
+  "main": "./HerdSpeak/",
+  "types": "./",
+  "module": "./build/.js",
+  "browser": "./build/.js",
+  "bin": {
+    "herdsay": "./cli.pl" "/gui.py" "/web.js",
+    "herdthink": "./cli.pl" "/gui.py" "/web.js"
+  },
+  "files": [
+    ".",
+    ".",
+    ".",
+    ".github/",
+    "CowFile_Maker/",
+    "CowPasture/",
+    "Cowsay_3.03/",
+    "Docs/",
+    "External/",
+    "External/Releases/"
+    "Extras/",
+    "Extras/Cowsay_HTML_Logs/",
+    "Graphics/"
+    "OldVersions/"
+    "PonyFile_Pasture/"
+    "RepoData/"
+    "Special-Editions/"
+    "Special-Editions/My-Little-Pony/Ponysay/" 
+    "Web/"
+    "Web/JavaScript-Editions/"
+    "Web/JavaScript-Editions/NoteJS/"
+    "Web/JavaScript-Editions/NoteJS/9.0/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seanpm2001/HerdSpeak.git"
+  },
+  "scripts": {
+    "prepare": "rollup -c",
+    "test": "tape test/**/*.js | tap-dot"
+  },
+  "dependencies": {
+    "get-stdin": "8.0.0",
+    "string-width": "~2.1.1",
+    "strip-final-newline": "2.0.0",
+    "yargs": "15.4.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "15.0.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "execa": "5.0.0",
+    "rollup": "2.26.5",
+    "rollup-plugin-string": "3.0.0",
+    "tap-dot": "2.0.0",
+    "tape": "5.0.1"
+  },
+  "preferGlobal": true,
+  "engines": {
+    "node": ">= 4"
+  }
+}
